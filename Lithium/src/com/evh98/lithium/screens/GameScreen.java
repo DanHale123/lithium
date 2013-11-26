@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.evh98.lithium.Lithium;
 
 public class GameScreen implements Screen{
@@ -13,12 +14,16 @@ public class GameScreen implements Screen{
 	
 	OrthographicCamera camera;
 	SpriteBatch batch;
+	ShapeRenderer shapeBatch;
 	
 	public GameScreen(Lithium game){
 		this.game = game;
 		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, 1080, 1920);
+		
+		batch = new SpriteBatch();
+		shapeBatch = new ShapeRenderer();
 	}
 	
 	@Override
