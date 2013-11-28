@@ -17,10 +17,8 @@ public class GameScreen implements Screen{
 	OrthographicCamera camera;
 	SpriteBatch batch;
 	ShapeRenderer shapeBatch;
-	
-	//18
 
-	public static int[][] map = {{0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0},};
+	int[][] tiles = new int[12][18];
 	
 	public GameScreen(Lithium game){
 		this.game = game;
@@ -47,13 +45,38 @@ public class GameScreen implements Screen{
 		batch.end();
 		
 		shapeBatch.begin(ShapeType.Filled);
-			shapeBatch.setColor(Color.valueOf("ea565a"));
-			shapeBatch.rect(90, 90, 128, 128);
+			for(int x=0; x<10; x++){
+				for(int y=0; y<20; y++){
+					if(tiles[x][y]==1){
+						shapeBatch.setColor(Color.ORANGE);
+						shapeBatch.rect(x*90, y*90, 90, 90);
+					}else{
+						
+					}
+				}
+			}
 		shapeBatch.end();
 	}
 
 	public void generalUpdate(OrthographicCamera camera, ShapeRenderer shapeBatch){
 		
+	}
+	
+	public void drawCell(ShapeRenderer shapeBatch, Color color, int x, int y){
+		tiles[x][y] = 1;
+	}
+	
+	public void drawToken(ShapeRenderer shapeBatch, Color color, int x, int y){
+		drawCell(shapeBatch, color, x+0, y+0);
+		drawCell(shapeBatch, color, x+0, y+1);
+		drawCell(shapeBatch, color, x+1, y+1);
+		drawCell(shapeBatch, color, x+2, y+0);
+	}
+	
+	public void eraseCell(ShapeRenderer shapeBatch, int x, int y){
+		tiles[x][y] = 0;
+		shapeBatch.setColor(Color.valueOf("f7f7f8"));
+		shapeBatch.rect(x*90, y*90, 90, 90);
 	}
 	
 	@Override
@@ -68,7 +91,6 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void dispose() {
-		
 	}
 
 	@Override
