@@ -2,10 +2,12 @@ package com.evh98.lithium.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.evh98.lithium.Lithium;
 
 public class GameScreen implements Screen{
@@ -15,6 +17,10 @@ public class GameScreen implements Screen{
 	OrthographicCamera camera;
 	SpriteBatch batch;
 	ShapeRenderer shapeBatch;
+	
+	//18
+
+	public static int[][] map = {{0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0},};
 	
 	public GameScreen(Lithium game){
 		this.game = game;
@@ -32,15 +38,21 @@ public class GameScreen implements Screen{
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		camera.update();
-		generalUpdate(camera);
 		batch.setProjectionMatrix(camera.combined);
+		shapeBatch.setProjectionMatrix(camera.combined);
+		generalUpdate(camera, shapeBatch);
 		
 		batch.begin();
 		
 		batch.end();
+		
+		shapeBatch.begin(ShapeType.Filled);
+			shapeBatch.setColor(Color.valueOf("ea565a"));
+			shapeBatch.rect(90, 90, 128, 128);
+		shapeBatch.end();
 	}
 
-	public void generalUpdate(OrthographicCamera camera){
+	public void generalUpdate(OrthographicCamera camera, ShapeRenderer shapeBatch){
 		
 	}
 	
